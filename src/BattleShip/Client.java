@@ -39,6 +39,15 @@ public class Client
 			out.flush();
 			
 			//Perform test here to see if we have run or lost
+			if (this.allEnemyShipsAreDestroyed())
+			{
+				this.out.println("You win! All enemy ships sunk.");
+				break;
+			}
+			if (this.allMyShipsAreDestroyed())
+			{
+				this.out.println("You lose! You go down with the last ship.");
+			}
 		}
 	}
 	
