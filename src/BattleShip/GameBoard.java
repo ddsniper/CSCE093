@@ -25,21 +25,80 @@ public class GameBoard
 		//draw the entire board... I'd use a StringBuilder object to improve speed
 		//remember - you must draw one entire row at a time, and don't forget the
 		//pretty border...
+		StringBuilder board = new StringBuilder();
+		board.append("/----------\\");
+		for(int i = 0; i<10; i++)
+			board.append("|           |");
+		board.append("\\----------/");
+		
+		return board.toString();
 	}
 	
 	//add in a ship if it fully 1) fits on the board and 2) doesn't collide w/
 	//an existing ship.
 	//Returns true on successful addition; false, otherwise
 	public boolean addShip( Ship s , Position sternLocation, HEADING bowDirection )
-	{
+	{			
 		
+		int shipLength = 0;
+		
+		if (s.toString() == "Cruiser")
+		{
+			shipLength = 3;
+		}
+		else if (s.toString() == "Destroyer")
+		{
+			shipLength = 2;
+		}
+		else {
+			System.out.println("Invalid ship.");
+			return false;
+		}
+			
+		if(sternLocation.x < 10 || sternLocation.y < 10)
+		{
+		
+			String dir = bowDirection.toString();
+			if(dir == "NORTH")
+			{
+				while(shipLength>0)
+					sternLocation.x =+ shipLength - 1;
+				return true;
+			}	
+			else if(dir == "SOUTH")
+			{
+				sternLocation.x =- shipLength - 1;
+				return true;
+			}
+			else if(dir == "EAST")
+			{
+				
+				return true;
+			}
+			else if(dir == "WEST")
+			{
+				
+				return true;
+			}
+			else 
+			{
+				System.out.println("Cannot add ship to board.");
+				return false;
+			}
+			
+		}
+		
+		else
+			System.out.println("Invalid input: ship would be off gameboard.");
+		return false;
+
 	}
 	
-	//Returns A reference to a ship, if that ship was struck by a missle.
+	//Returns A reference to a ship, if that ship was struck by a Missile.
 	//The returned ship can then be used to print the name of the ship which
 	//was hit to the player who hit it.
 	//Ensure you handle missiles that may fly off the grid
-	public Ship fireMissle( Position coordinate )
+	public Ship fireMissile( Position coordinate )
 	{
 		
 	}
@@ -65,20 +124,20 @@ public class GameBoard
 		
 		System.out.println( b.draw() );
 		
-		b.fireMissle( new Position(3,5) );
+		b.fireMissile( new Position(3,5) );
 		System.out.println( b.draw() );
-		b.fireMissle( new Position(3,4) );
+		b.fireMissile( new Position(3,4) );
 		System.out.println( b.draw() );
-		b.fireMissle( new Position(3,3) );
-		System.out.println( b.draw() );
-		
-		b.fireMissle( new Position(0,6) );
-		b.fireMissle( new Position(1,6) );
-		b.fireMissle( new Position(2,6) );
-		b.fireMissle( new Position(3,6) );
+		b.fireMissile( new Position(3,3) );
 		System.out.println( b.draw() );
 		
-		b.fireMissle( new Position(6,6) );
+		b.fireMissile( new Position(0,6) );
+		b.fireMissile( new Position(1,6) );
+		b.fireMissile( new Position(2,6) );
+		b.fireMissile( new Position(3,6) );
+		System.out.println( b.draw() );
+		
+		b.fireMissile( new Position(6,6) );
 		System.out.println( b.draw() );
 	}
 

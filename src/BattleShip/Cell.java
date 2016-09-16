@@ -2,7 +2,7 @@ package BattleShip;
 
 public class Cell
 {
-	protected boolean struckByMissle = false;
+	protected boolean struckByMissile = false;
 	protected Ship ship = null;
 	
 	public Cell()
@@ -21,12 +21,12 @@ public class Cell
 	{
 		if( this.ship == null )
 		{
-			if( this.struckByMissle )
+			if( this.struckByMissile )
 				return 'x';
 			return ' ';
 		}
 		//a ship is at this cell
-		return ship.drawShipStatusAtCell( this.struckByMissle );			
+		return ship.drawShipStatusAtCell( this.struckByMissile );			
 	}
 	
 	public Ship getShip() { return this.ship; }
