@@ -17,6 +17,13 @@ public class GameBoard
 		this.colCount = colCount;
 		
 		//create the 2D array of cells
+		for (int row = 0; row < this.rowCount; row++)
+		{
+			for(int col = 0; col < this.colCount; col++)
+			{
+				cells.add(Cell.getShip()); //?
+			}
+		}
 	}
 	
 	public String draw()
@@ -100,7 +107,8 @@ public class GameBoard
 	//Ensure you handle missiles that may fly off the grid
 	public Ship fireMissile( Position coordinate )
 	{
-		
+		if( Ship.this.position.contains(coordinate) == true )
+			Ship.this.drawShipStatusAtCell(true);
 	}
 	
 	//Here's a simple driver that should work without touching any of the code below this point
@@ -116,7 +124,7 @@ public class GameBoard
 		else
 			System.out.println( "Failed to add " + s.getName() );
 		
-		s = new Destroyer( "Vader" );
+		s = new Destroyer( "Destroyer" );
 		if( b.addShip(s, new Position(3,5), HEADING.NORTH ) )
 			System.out.println( "Added " + s.getName() + "Location is " );
 		else
