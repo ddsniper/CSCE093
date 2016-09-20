@@ -21,7 +21,7 @@ public class GameBoard
 		{
 			for(int col = 0; col < this.colCount; col++)
 			{
-				cells.add(Cell.getShip()); //?
+		//		cells.add(this.rowCount,);  //THIS IS STILL BROKE
 			}
 		}
 	}
@@ -33,12 +33,17 @@ public class GameBoard
 		//remember - you must draw one entire row at a time, and don't forget the
 		//pretty border...
 		StringBuilder board = new StringBuilder();
-		board.append("/----------\\");
-		for(int i = 0; i<10; i++)
-			board.append("|           |");
-		board.append("\\----------/");
+		
+		for (int i = 0; i < rowCount; i++)
+		{
+			if (i==0 || i == (rowCount - 1))
+				board.append("------------");
+			else
+				board.append("|          |");
+		}
 		
 		return board.toString();
+		
 	}
 	
 	//add in a ship if it fully 1) fits on the board and 2) doesn't collide w/
@@ -68,8 +73,8 @@ public class GameBoard
 			String dir = bowDirection.toString();
 			if(dir == "NORTH")
 			{
-				while(shipLength>0)
-					sternLocation.x =+ shipLength - 1;
+			//	while(shipLength>0)
+				sternLocation.x =+ shipLength - 1;
 				return true;
 			}	
 			else if(dir == "SOUTH")
@@ -79,12 +84,12 @@ public class GameBoard
 			}
 			else if(dir == "EAST")
 			{
-				
+				sternLocation.y =+ shipLength - 1;
 				return true;
 			}
 			else if(dir == "WEST")
 			{
-				
+				sternLocation.y =- shipLength - 1;
 				return true;
 			}
 			else 
@@ -96,7 +101,7 @@ public class GameBoard
 		}
 		
 		else
-			System.out.println("Invalid input: ship would be off gameboard.");
+			System.out.println("Invalid input: ship off gameboard.");
 		return false;
 
 	}
@@ -107,8 +112,10 @@ public class GameBoard
 	//Ensure you handle missiles that may fly off the grid
 	public Ship fireMissile( Position coordinate )
 	{
-		if( Ship.this.position.contains(coordinate) == true )
-			Ship.this.drawShipStatusAtCell(true);
+	//	myShips.
+	//	if( Ship.this.position.contains(coordinate) == true )
+	//		Ship.this.drawShipStatusAtCell(true);
+		return null; //for the time being
 	}
 	
 	//Here's a simple driver that should work without touching any of the code below this point
