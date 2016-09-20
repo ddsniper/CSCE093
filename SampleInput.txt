@@ -1,0 +1,32 @@
+Player A
+D 2 4 S Destroyer ABoat
+C 3 5 N Cruiser ABoat
+F 0 0
+F 1 0
+F 2 0
+C You're going down
+F 0 1
+F 1 1
+F 2 1
+C Now I've got you...
+F 3 1
+
+
+
+
+Player B
+D 0 0 E Destroyer BBoat
+C 0 1 E Cruiser BBoat
+F 9 9
+C Hello Opponent... You're In trouble...
+F 10 10
+F 9 8
+F 2 4
+F 2 5
+F 2 6
+F 3 5
+F 3 2
+F 3 3
+C Now you're gonna get it
+F 3 4
+
