@@ -11,8 +11,8 @@ public class Destroyer extends Ship {
 	@Override
 	public char drawShipStatusAtCell(boolean isDamaged) {
 		if(isDamaged)
-			return 'c';
-		return 'C';
+			return 'd';
+		return 'D';
 	}
 
 	@Override
