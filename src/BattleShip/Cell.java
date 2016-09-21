@@ -11,6 +11,9 @@ public class Cell
 	
 	public boolean hasBeenStruckByMissile()
 	{
+		//Still need to add stuff here...
+		
+		return struckByMissile; 
 	}
 	
 	public void hasBeenStruckByMissile( boolean wasStruck )
