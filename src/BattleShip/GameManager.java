@@ -45,6 +45,7 @@ public class GameManager
 	//Don't forget about try/finally blocks, if needed
 	boolean waitFor2PlayersToConnect() throws IOException
 	{
+		//listener.
 	}
 	
 	//let players initialize their name, and gameboard here. This should be done asynchronously
