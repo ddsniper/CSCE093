@@ -1,0 +1,4 @@
+bandname_mpa_songname
+vanillaice_mpa_iceicebaby
+gojira_mpa_liquidfire
+metallica_mpa_entersandman

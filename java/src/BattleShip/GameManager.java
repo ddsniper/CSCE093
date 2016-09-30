@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GameManager
 {
 	private ArrayList<Client> clients = new ArrayList<Client>();
-	private ServerSocket listener = null;
+//?	private ServerSocket listener = null;
 	
 	public GameManager()
 	{		
@@ -23,6 +23,12 @@ public class GameManager
 	//so a client is able to use this method to get a reference to his opponent
 	public Client getOpponent( Client me )
 	{
+		for (Client c : this.clients) {
+            if (!c.equals(me)) {
+                return c;
+            }
+        }
+        throw new Error("Error, no opponent found!");
 	}
 	
 	//In a asychronous nature, begin playing the game. This should only occur after 
@@ -45,12 +51,40 @@ public class GameManager
 	//Don't forget about try/finally blocks, if needed
 	boolean waitFor2PlayersToConnect() throws IOException
 	{
-		//listener.
+		try {
+            ServerSocket serverSocket = new ServerSocket(10000);
+            //connect with client 1
+            Socket clientSocket = serverSocket.accept();
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out.println("You are connected to the server. Once your opponent joins game setup will begin.");
+            //connect with client 2
+            Socket clientSocket2 = serverSocket.accept();
+            PrintWriter out2 = new PrintWriter(clientSocket2.getOutputStream(), true);
+            BufferedReader in2 = new BufferedReader(new InputStreamReader(clientSocket2.getInputStream()));
+            //initialize the client objects
+            Client p1 = new Client(in, out, this);
+            Client p2 = new Client(in2, out2, this);
+
+            //add them to our list of clients
+            this.clients.add(p1);
+            this.clients.add(p2);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error adding players." + e.toString());
+            e.printStackTrace();
+        }
+        return false;
 	}
 	
 	//let players initialize their name, and gameboard here. This should be done asynchronously
 	void initPlayers() throws IOException
 	{
+		clients.parallelStream().forEach( client -> 
+		{
+			try{ client.initPlayer(); }
+			catch( IOException e ) { e.printStackTrace(); } 
+		} );
 	}
 	
 	
